@@ -16,6 +16,9 @@ export const SITE_URL = "https://www.bodyologychiropractic.com.au";
 
 export const BOOKING_URL = "#booking";
 
+/** GA4 measurement ID. Empty string disables analytics. */
+export const GA_MEASUREMENT_ID = "G-6RDE6FLTSY";
+
 export const LOGO = {
   src: "/brand/logo.webp",
   width: 440,

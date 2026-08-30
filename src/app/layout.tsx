@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import AOSProvider from "@/components/animations/AOSProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 import JsonLd from "@/components/seo/JsonLd";
 import { practiceSchema, websiteSchema } from "@/lib/structured-data";
 import { ADDRESS, SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <link rel="preconnect" href="https://app.iconpractice.com" />
         <link rel="dns-prefetch" href="https://js.stripe.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
       </head>
       <body className="flex min-h-full flex-col font-sans antialiased">
         <JsonLd data={[practiceSchema(), websiteSchema()]} />
@@ -43,6 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <Analytics />
         <SpeedInsights />
+        <GoogleAnalytics />
       </body>
     </html>
   );
