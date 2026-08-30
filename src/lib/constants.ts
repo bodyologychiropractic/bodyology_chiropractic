@@ -50,8 +50,7 @@ export const NAV_LINKS: NavLink[] = [
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: "Facebook", href: "https://facebook.com", icon: "facebook" },
-  { label: "Instagram", href: "https://instagram.com", icon: "instagram" },
+  { label: "Facebook", href: "https://facebook.com/share/1BxvXemG1i", icon: "facebook" },
 ];
 
 
