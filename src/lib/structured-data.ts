@@ -30,6 +30,13 @@ export function practiceSchema() {
     slogan: "Better Flow. Better Life.",
     description: SITE_DESCRIPTION,
     url: `${SITE_URL}/`,
+    logo: {
+      "@type": "ImageObject",
+      url: absolute("/brand/icon-512.png"),
+      width: 512,
+      height: 512,
+    },
+    image: absolute("/images/hero/hero-1600.webp"),
     telephone: PHONE_E164,
     email: CONTACT.email,
     priceRange: "$$",
