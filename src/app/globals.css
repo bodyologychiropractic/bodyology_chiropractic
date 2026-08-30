@@ -1,0 +1,208 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--brand-background);
+  --color-surface: var(--brand-surface);
+  --color-surface-strong: var(--brand-surface-strong);
+  --color-foreground: var(--brand-foreground);
+  --color-primary: var(--brand-primary);
+  --color-secondary: var(--brand-secondary);
+  --color-accent: var(--brand-accent);
+  --color-muted: var(--brand-muted);
+  --color-border: var(--brand-border);
+  --color-on-dark: var(--brand-on-dark);
+}
+
+@layer base {
+  :root {
+    /* Brand palette, navy + teal (Bodyology Chiropractic). */
+    --brand-background: #ffffff;
+    --brand-surface: #f4f7f9;
+    --brand-surface-strong: #0b2f52;
+    --brand-foreground: #0b2f52;
+    --brand-primary: #0b2f52;
+    --brand-secondary: #14757c;
+    --brand-accent: #14757c;
+    --brand-muted: #5b7186;
+    --brand-border: #d8e2ea;
+    --brand-on-dark: #eaf2f7;
+
+    /* Horizontal gutter, widened at each breakpoint. */
+    --gutter: 1rem;
+    /* Vertical rhythm, every Section uses these, so padding stays consistent. */
+    --section-y: 3.5rem;
+    --section-y-sm: 2.25rem;
+    --section-y-lg: 5rem;
+    /* Gap between blocks inside a section. */
+    --block-gap: 2rem;
+    /* Safe-area insets (iPhone notch / Dynamic Island, iPad rounded corners). */
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --gutter: 1.5rem;
+      --section-y: 4.5rem;
+      --section-y-sm: 3rem;
+      --section-y-lg: 6rem;
+      --block-gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --gutter: 2rem;
+      --section-y: 5.5rem;
+      --section-y-sm: 3.5rem;
+      --section-y-lg: 7rem;
+      --block-gap: 3rem;
+    }
+  }
+
+  .dark {
+    --brand-background: #071e35;
+    --brand-surface: #0b2f52;
+    --brand-surface-strong: #061a2e;
+    --brand-foreground: #eaf2f7;
+    --brand-primary: #7cc2d6;
+    --brand-secondary: #3ea3a8;
+    --brand-accent: #3ea3a8;
+    --brand-muted: #9db3c4;
+    --brand-border: #1c456b;
+    --brand-on-dark: #eaf2f7;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Stop iOS Safari from inflating text in landscape. */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    /* Nothing may push the page sideways on a narrow screen. */
+    overflow-x: hidden;
+  }
+
+  /* Remove the grey flash when tapping on iOS. */
+  a,
+  button,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Comfortable touch targets on touch devices only, the mouse keeps tight spacing. */
+  @media (hover: none) and (pointer: coarse) {
+    a,
+    button,
+    [role="button"],
+    input,
+    select,
+    textarea {
+      min-height: 44px;
+    }
+  }
+
+  /* Media and embeds never overflow their column. */
+  img,
+  video,
+  canvas,
+  svg,
+  iframe {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  /* One vertical rhythm for every section on the site. */
+  .section-y {
+    padding-block: var(--section-y);
+  }
+
+  .section-y-sm {
+    padding-block: var(--section-y-sm);
+  }
+
+  .section-y-lg {
+    padding-block: var(--section-y-lg);
+  }
+
+  .block-gap {
+    gap: var(--block-gap);
+  }
+
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    max-width: 72rem;
+    padding-inline: calc(var(--gutter) + var(--safe-left))
+      calc(var(--gutter) + var(--safe-right));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Wide content (tables, code, diagrams) scrolls inside itself instead of
+     widening the page. */
+  .scroll-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pb-safe {
+    padding-bottom: calc(1rem + var(--safe-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  [data-aos="fade-left"],
+  [data-aos="fade-right"],
+  [data-aos="fade-down-left"],
+  [data-aos="fade-down-right"],
+  [data-aos="fade-up-left"],
+  [data-aos="fade-up-right"],
+  [data-aos="slide-left"],
+  [data-aos="slide-right"],
+  [data-aos^="zoom"],
+  [data-aos="flip-left"],
+  [data-aos="flip-right"] {
+    transform: translate3d(0, 100px, 0) !important;
+  }
+
+  [data-aos="fade-left"].aos-animate,
+  [data-aos="fade-right"].aos-animate,
+  [data-aos="fade-down-left"].aos-animate,
+  [data-aos="fade-down-right"].aos-animate,
+  [data-aos="fade-up-left"].aos-animate,
+  [data-aos="fade-up-right"].aos-animate,
+  [data-aos="slide-left"].aos-animate,
+  [data-aos="slide-right"].aos-animate,
+  [data-aos^="zoom"].aos-animate,
+  [data-aos="flip-left"].aos-animate,
+  [data-aos="flip-right"].aos-animate {
+    transform: translate3d(0, 0, 0) !important;
+  }
+}
