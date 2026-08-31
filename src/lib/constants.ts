@@ -98,8 +98,7 @@ export const CONTACT = {
 
 export const OPENING_HOURS: OpeningHour[] = [
   { days: "Mon – Fri", hours: "8:00am – 6:00pm" },
-  { days: "Saturday", hours: "8:00am – 2:00pm" },
-  { days: "Sunday", hours: "Closed" },
+  { days: "Sat – Sun", hours: "Closed" },
 ];
 
 export const OPENING_HOURS_SPEC = [
@@ -108,7 +107,6 @@ export const OPENING_HOURS_SPEC = [
     opens: "08:00",
     closes: "18:00",
   },
-  { days: ["Saturday"], opens: "08:00", closes: "14:00" },
 ];
 
 export const MAP_QUERY = `${SITE_NAME}, ${CONTACT.addressLines.join(", ")}`;
