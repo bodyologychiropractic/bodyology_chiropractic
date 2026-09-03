@@ -19,6 +19,12 @@ export const BOOKING_URL = "#booking";
 /** GA4 measurement ID. Empty string disables analytics. */
 export const GA_MEASUREMENT_ID = "G-6RDE6FLTSY";
 
+/** Google Ads conversion ID. Empty string disables Google Ads conversion tracking. */
+export const GOOGLE_ADS_CONVERSION_ID = "AW-18417893435";
+
+/** Google Ads call conversion label, used with the dynamic phone number swap. */
+export const GOOGLE_ADS_CALL_CONVERSION_LABEL = "dWleCP3BkOscELuAq85E";
+
 export const LOGO = {
   src: "/brand/logo.webp",
   width: 440,

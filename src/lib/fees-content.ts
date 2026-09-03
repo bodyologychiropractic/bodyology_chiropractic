@@ -25,7 +25,7 @@ export const FEES: Fee[] = [
   {
     id: "extended",
     name: "Extended Chiropractic Consultation",
-    price: "$135",
+    price: "$130",
     duration: "30 minutes",
     paragraphs: ["For presentations requiring additional hands-on treatment time."],
     itemsLabel: "Care may incorporate:",
@@ -42,7 +42,7 @@ export const FEES: Fee[] = [
   {
     id: "comprehensive",
     name: "Comprehensive Chiropractic Consultation",
-    price: "$165",
+    price: "$150",
     duration: "40 minutes",
     paragraphs: [
       "Designed for more involved presentations or patients requiring additional assessment and treatment time.",
