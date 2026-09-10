@@ -10,7 +10,7 @@ export default function Services() {
       <SectionHeading
         eyebrow="Services"
         title="How We Can Help"
-        description="Hands-on treatment tailored to how you move, work and recover."
+        description="Hands-on treatment personalised to how you move, work and recover."
         data-aos="fade-up"
       />
 
