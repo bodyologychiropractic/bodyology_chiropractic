@@ -6,6 +6,7 @@ import AOSProvider from "@/components/animations/AOSProvider";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
+import GoogleTagManager from "@/components/seo/GoogleTagManager";
 import JsonLd from "@/components/seo/JsonLd";
 import { practiceSchema, websiteSchema } from "@/lib/structured-data";
 import { ADDRESS, SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
