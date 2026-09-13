@@ -1,6 +1,5 @@
 {
   "intro": {
-    "id": "about-intro",
     "eyebrow": "About",
     "title": "About Bodyology Chiropractic",
     "paragraphs": [
@@ -9,7 +8,6 @@
     ]
   },
   "practitioner": {
-    "id": "practitioner",
     "eyebrow": "Chiropractor",
     "title": "Meet Dr Dong Tran",
     "paragraphs": [
@@ -20,7 +18,6 @@
     ]
   },
   "beyondPain": {
-    "id": "beyond-pain",
     "eyebrow": "Our philosophy",
     "title": "Looking Beyond the Site of Pain",
     "paragraphs": [
@@ -31,19 +28,13 @@
     ]
   },
   "fascia": {
-    "id": "fascia",
     "eyebrow": "Fascial Manipulation®",
     "title": "Could Fascia Be Part of the Missing Piece?",
     "paragraphs": [
-      "Have you ever wondered why some musculoskeletal symptoms continue or return even after treatment?",
-      "Past injuries, repetitive strain and periods of immobilisation can affect more than muscles and joints. They may also be associated with changes in the fascia, the connective tissue network that surrounds and connects muscles and other structures throughout the body.",
-      "Sometimes, the area that hurts may not tell the whole story.",
-      "Where clinically appropriate, Fascial Manipulation® may form part of your assessment and treatment. This approach considers areas of fascial restriction that may be contributing to altered movement or ongoing musculoskeletal symptoms.",
-      "By incorporating fascial assessment into a broader whole-body examination, we aim to better understand the factors that may be influencing the way you move and function."
+      "Have you ever wondered why some musculoskeletal symptoms continue or return even after treatment? Past injuries, repetitive strain and periods of immobilisation can affect more than muscles and joints. They may also be associated with changes in the fascia, the connective tissue network that surrounds and connects muscles and other structures throughout the body. Sometimes, the area that hurts may not tell the whole story. Where clinically appropriate, Fascial Manipulation® may form part of your assessment and treatment. This approach considers areas of fascial restriction that may be contributing to altered movement or ongoing musculoskeletal symptoms. By incorporating fascial assessment into a broader whole-body examination, we aim to better understand the factors that may be influencing the way you move and function."
     ]
   },
   "careApproach": {
-    "id": "care-approach",
     "eyebrow": "In the clinic",
     "title": "Our Approach to Care",
     "description": "Depending on your individual needs, care at Bodyology Chiropractic may incorporate:",
@@ -58,7 +49,6 @@
   },
   "careApproachNote": "Rehabilitation is individually prescribed to complement your in-clinic care, support movement and function, and help you work towards the best possible outcome for your goals.",
   "conditions": {
-    "id": "conditions",
     "eyebrow": "What we see",
     "title": "Conditions We Commonly Assess and Manage",
     "description": "We commonly see patients presenting with musculoskeletal concerns such as:",
@@ -76,7 +66,6 @@
     ]
   },
   "qualifications": {
-    "id": "qualifications",
     "eyebrow": "Dr Dong Tran, Chiropractor",
     "title": "Qualifications & Professional Training",
     "items": [
