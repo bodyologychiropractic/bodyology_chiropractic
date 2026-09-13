@@ -1,0 +1,15 @@
+{
+  "slug": "chiropractic-adjustments",
+  "title": "Chiropractic Adjustment",
+  "description": "Controlled, targeted movement applied to a joint to restore mobility and ease stiffness.",
+  "icon": "spine",
+  "imageName": "chiropractic-adjustment",
+  "imageWidths": [
+    400,
+    640,
+    752
+  ],
+  "whatItIs": "A chiropractic adjustment is a controlled, targeted movement applied to a joint of the spine or another area of the body.",
+  "howItWorks": "The adjustment briefly moves the joint through a specific range, helping restore movement in areas that are stiff or restricted. It also provides sensory input to the nervous system through the receptors located in and around the joint.",
+  "howItHelps": "It may help improve joint mobility, reduce stiffness and make everyday movement feel easier and more comfortable."
+}

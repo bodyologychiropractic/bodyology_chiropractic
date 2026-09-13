@@ -54,3 +54,6 @@ next-env.d.ts
 # os / tooling caches
 .cache/
 .turbo/
+
+/tina/__generated__
+/public/admin

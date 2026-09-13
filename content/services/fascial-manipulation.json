@@ -1,0 +1,15 @@
+{
+  "slug": "fascial-manipulation",
+  "title": "Fascial Manipulation",
+  "description": "Focused friction on fascia to restore the glide between layers of connective tissue.",
+  "icon": "fascia",
+  "imageName": "fascial-manipulation",
+  "imageWidths": [
+    400,
+    640,
+    940
+  ],
+  "whatItIs": "Fascial manipulation is a hands-on treatment that focuses on fascia — the connective tissue that surrounds and links muscles and other structures throughout the body.",
+  "howItWorks": "Specific areas of altered fascial mobility are assessed and treated with focused friction. The friction generates local heat and mechanical stimulation, which may help improve the sliding and gliding between layers of connective tissue.",
+  "howItHelps": "Improved fascial mobility may reduce feelings of stiffness or restriction and allow muscles and joints to move more freely and efficiently."
+}

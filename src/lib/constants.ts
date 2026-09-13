@@ -4,17 +4,17 @@ import type {
   ResponsiveImageSet,
   SocialLink,
 } from "@/types";
+import settings from "../../content/settings/settings.json";
 
-export const SITE_NAME = "Bodyology Chiropractic";
+export const SITE_NAME: string = settings.siteName;
 
-export const SITE_TAGLINE = "Better Flow. Better Life.";
+export const SITE_TAGLINE: string = settings.siteTagline;
 
-export const SITE_DESCRIPTION =
-  "We provide personalised chiropractic care to help you move better, feel better and get back to doing the things you enjoy.";
+export const SITE_DESCRIPTION: string = settings.siteDescription;
 
 export const SITE_URL = "https://www.bodyologychiropractic.com.au";
 
-export const BOOKING_URL = "#booking";
+export const BOOKING_URL: string = settings.bookingUrl;
 
 /** GA4 measurement ID. Empty string disables analytics. */
 export const GA_MEASUREMENT_ID = "G-6RDE6FLTSY";
@@ -50,62 +50,29 @@ export const ABOUT_IMAGE: ResponsiveImageSet = {
   widths: [480, 960],
 };
 
-export const NAV_LINKS: NavLink[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Fees", href: "/fees" },
-  { label: "Contact", href: "/contact" },
-];
+export const NAV_LINKS: NavLink[] = settings.navLinks;
 
-export const SOCIAL_LINKS: SocialLink[] = [
-  { label: "Facebook", href: "https://facebook.com/share/1BxvXemG1i", icon: "facebook" },
-];
+export const SOCIAL_LINKS: SocialLink[] = settings.socialLinks as SocialLink[];
 
+export const PRACTITIONER = settings.practitioner;
 
-export const PRACTITIONER = {
-  name: "Dr. Dong Tran",
-  role: "Chiropractor",
-  intro: [
-    "At Bodyology Chiropractic, we are passionate about helping people move and live better through personalised, evidence-informed chiropractic care.",
-    "We take the time to find the root cause of pain and create a treatment plan tailored to each person's goals.",
-  ],
-  credentials: [
-    "Bachelor of Chiropractic Science",
-    "Master of Chiropractic – Macquarie University",
-    "AHPRA Registered – Chiropractor",
-    "Dry Needling Certified",
-    "Fascial Manipulation Certified",
-    "Committed to ongoing education and patient outcomes",
-  ],
-};
+export const ADDRESS = settings.address;
 
-export const ADDRESS = {
-  street: "Suite 3.06, 5 Celebration Drive",
-  suburb: "Bella Vista",
-  state: "NSW",
-  postcode: "2153",
-  country: "AU",
-};
-
-export const PHONE_E164 = "+61466353888";
+export const PHONE_E164: string = settings.phoneE164;
 
 export const CONTACT = {
-  phone: "0466 353 888",
-  email: "info@bodyologychiropractic.com.au",
-  website: "www.bodyologychiropractic.com.au",
+  phone: settings.contact.phone,
+  email: settings.contact.email,
+  website: settings.contact.website,
   addressLines: [
     ADDRESS.street,
     `${ADDRESS.suburb} ${ADDRESS.state} ${ADDRESS.postcode}`,
   ],
-  parking: "Free parking available on-site.",
-  region: "Bella Vista, NSW",
+  parking: settings.contact.parking,
+  region: settings.contact.region,
 };
 
-export const OPENING_HOURS: OpeningHour[] = [
-  { days: "Mon – Fri", hours: "8:00am – 6:00pm" },
-  { days: "Sat – Sun", hours: "Closed" },
-];
+export const OPENING_HOURS: OpeningHour[] = settings.openingHours;
 
 export const OPENING_HOURS_SPEC = [
   {

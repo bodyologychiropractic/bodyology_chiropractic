@@ -3,14 +3,15 @@ import ServiceCard from "@/components/services/ServiceCard";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { SERVICES } from "@/lib/services-content";
+import homeData from "../../../content/home/home.json";
 
 export default function Services() {
   return (
     <Section id="services">
       <SectionHeading
-        eyebrow="Services"
-        title="How We Can Help"
-        description="Hands-on treatment personalised to how you move, work and recover."
+        eyebrow={homeData.servicesSection.eyebrow}
+        title={homeData.servicesSection.title}
+        description={homeData.servicesSection.description}
         data-aos="fade-up"
       />
 

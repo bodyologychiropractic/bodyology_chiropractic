@@ -1,0 +1,15 @@
+{
+  "slug": "rehabilitation",
+  "title": "Rehabilitation & Exercise Therapy",
+  "description": "Individualised exercise programs that build strength, control and confidence in movement.",
+  "icon": "rehab",
+  "imageName": "rehabilitation",
+  "imageWidths": [
+    400,
+    640,
+    940
+  ],
+  "whatItIs": "Rehabilitation uses individualised exercises designed around the patient's assessment, physical capacity and goals.",
+  "howItWorks": "Repeated movement and progressive loading encourage the muscles, joints and nervous system to adapt. Over time, this can improve strength, coordination, endurance, mobility and control.",
+  "howItHelps": "Rehabilitation can make everyday activities easier, improve confidence in movement and help patients build the physical capacity needed for work, sport and daily activities."
+}
