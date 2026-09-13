@@ -28,10 +28,6 @@ export default function Footer() {
           &copy; {year} {SITE_NAME}. All rights reserved.
         </p>
       </div>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KK7S6KMT"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
     </footer>
   );
 }

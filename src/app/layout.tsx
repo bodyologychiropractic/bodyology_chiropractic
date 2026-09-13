@@ -7,6 +7,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 import GoogleTagManager from "@/components/seo/GoogleTagManager";
+import MetaPixel from "@/components/seo/MetaPixel";
 import JsonLd from "@/components/seo/JsonLd";
 import { practiceSchema, websiteSchema } from "@/lib/structured-data";
 import { ADDRESS, SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
@@ -47,6 +48,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Analytics />
         <SpeedInsights />
         <GoogleAnalytics />
+        <GoogleTagManager />
+        <MetaPixel />
       </body>
     </html>
   );
