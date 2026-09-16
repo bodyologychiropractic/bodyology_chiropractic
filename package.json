@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "payload migrate && next build",
     "start": "next start",
-    "seed": "tsx --env-file=.env.local scripts/seed-payload.ts"
+    "seed": "tsx --env-file=.env.local scripts/seed-payload.ts",
+    "migrate:create": "payload migrate:create"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.89.0",
