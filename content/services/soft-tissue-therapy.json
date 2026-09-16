@@ -1,0 +1,15 @@
+{
+  "slug": "soft-tissue-therapy",
+  "title": "Soft Tissue Therapy",
+  "description": "Hands-on techniques for muscles and connective tissue to release tension and restore movement.",
+  "icon": "hands",
+  "imageName": "soft-tissue-work",
+  "imageWidths": [
+    400,
+    640,
+    940
+  ],
+  "whatItIs": "Soft tissue therapy uses hands-on techniques to work on muscles and surrounding connective tissues.",
+  "howItWorks": "Pressure, stretching and manual techniques are applied to areas of muscle tension or reduced tissue mobility. This can influence muscle tone, local circulation and the way the nervous system responds to tension and discomfort.",
+  "howItHelps": "It may help reduce muscle tightness and tenderness, improve flexibility and allow the body to move more comfortably."
+}

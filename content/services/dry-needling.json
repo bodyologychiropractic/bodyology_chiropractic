@@ -1,0 +1,15 @@
+{
+  "slug": "dry-needling",
+  "title": "Dry Needling",
+  "description": "Very fine, sterile needles placed into selected muscles to ease tightness and tenderness.",
+  "icon": "needle",
+  "imageName": "dry-needling",
+  "imageWidths": [
+    400,
+    640,
+    940
+  ],
+  "whatItIs": "Dry needling involves inserting very fine, sterile needles into selected muscles or soft tissues.",
+  "howItWorks": "The needle provides a local mechanical stimulus to the muscle and surrounding tissue. In some areas it may produce a brief twitch response and can influence muscle activity and the way pain signals are processed by the nervous system.",
+  "howItHelps": "It may help reduce muscular tightness and tenderness and improve movement where muscle tension is contributing to discomfort or restriction."
+}

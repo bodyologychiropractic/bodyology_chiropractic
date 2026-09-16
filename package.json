@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "payload migrate && next build",
+    "build": "payload migrate && tsx --env-file-if-exists=.env.local scripts/seed-payload.ts && next build",
     "start": "next start",
     "seed": "tsx --env-file=.env.local scripts/seed-payload.ts",
     "migrate:create": "payload migrate:create"

@@ -21,6 +21,12 @@ function toArrayField(values: string[] | undefined) {
 async function run() {
   const payload = await getPayload({ config });
 
+  const existingServices = await payload.find({ collection: "services", limit: 1 });
+  if (existingServices.docs.length > 0) {
+    console.log("Database already has content — skipping seed.");
+    process.exit(0);
+  }
+
   // ---- settings -----------------------------------------------------
   const settings = readJson<{
     siteName: string;

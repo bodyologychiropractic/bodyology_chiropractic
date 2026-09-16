@@ -1,0 +1,16 @@
+{
+  "fees": {
+    "eyebrow": "Fees",
+    "title": "Consultation Fees"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Get in Touch",
+    "description": "We are in {{region}}. Book online any time, or call us if you would like to talk through your presentation first."
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "How We Can Help",
+    "description": "Care is selected according to your presentation and clinical findings. Choose a service to read more about what it involves."
+  }
+}

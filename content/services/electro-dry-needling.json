@@ -1,0 +1,15 @@
+{
+  "slug": "electro-dry-needling",
+  "title": "Electro Dry Needling",
+  "description": "Dry needling paired with a gentle electrical current for repeated, rhythmic stimulation.",
+  "icon": "needle",
+  "imageName": "electro-dry-needling",
+  "imageWidths": [
+    400,
+    640,
+    940
+  ],
+  "whatItIs": "Electro dry needling combines dry needling with a gentle electrical current applied through the needles.",
+  "howItWorks": "The electrical current provides repeated stimulation to the local muscles and nerves. This creates a controlled rhythmic response and may influence muscle activity and pain signalling within the nervous system.",
+  "howItHelps": "It may help decrease muscle tension, reduce pain sensitivity and improve comfort and movement in selected musculoskeletal conditions."
+}

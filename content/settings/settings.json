@@ -1,0 +1,51 @@
+{
+  "siteName": "Bodyology Chiropractic",
+  "siteTagline": "Better Flow. Better Life.",
+  "siteDescription": "We provide personalised chiropractic care to help you move better, feel better and get back to doing the things you enjoy.",
+  "bookingUrl": "#booking",
+  "practitioner": {
+    "name": "Dr. Dong Tran",
+    "role": "Chiropractor",
+    "intro": [
+      "At Bodyology Chiropractic, we are passionate about helping people move and live better through personalised, evidence-informed chiropractic care.",
+      "We take the time to find the root cause of pain and create a treatment plan tailored to each person's goals."
+    ],
+    "credentials": [
+      "Bachelor of Chiropractic Science",
+      "Master of Chiropractic – Macquarie University",
+      "AHPRA Registered – Chiropractor",
+      "Dry Needling Certified",
+      "Fascial Manipulation Certified",
+      "Committed to ongoing education and patient outcomes"
+    ]
+  },
+  "address": {
+    "street": "Suite 3.06, 5 Celebration Drive",
+    "suburb": "Bella Vista",
+    "state": "NSW",
+    "postcode": "2153",
+    "country": "AU"
+  },
+  "phoneE164": "+61466353888",
+  "contact": {
+    "phone": "0466 353 888",
+    "email": "info@bodyologychiropractic.com.au",
+    "website": "www.bodyologychiropractic.com.au",
+    "parking": "Free parking available on-site.",
+    "region": "Bella Vista, NSW"
+  },
+  "openingHours": [
+    { "days": "Mon – Fri", "hours": "8:00am – 6:00pm" },
+    { "days": "Sat – Sun", "hours": "Closed" }
+  ],
+  "socialLinks": [
+    { "label": "Facebook", "href": "https://facebook.com/share/1BxvXemG1i", "icon": "facebook" }
+  ],
+  "navLinks": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about" },
+    { "label": "Services", "href": "/services" },
+    { "label": "Fees", "href": "/fees" },
+    { "label": "Contact", "href": "/contact" }
+  ]
+}
