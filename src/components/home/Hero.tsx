@@ -3,16 +3,24 @@ import ResponsiveImage from "@/components/ui/ResponsiveImage";
 import Icon from "@/components/ui/Icon";
 import { buildMobileSrcSet, buildSrcSet, imageSrc } from "@/lib/images";
 import {
-  ADDRESS,
-  BOOKING_URL,
-  CONTACT,
   HERO_IMAGE,
   HERO_LOGO,
-  SITE_DESCRIPTION,
-  SITE_NAME,
+  getAddress,
+  getBookingUrl,
+  getContact,
+  getSiteDescription,
+  getSiteName,
 } from "@/lib/constants";
 
-export default function Hero() {
+export default async function Hero() {
+  const [address, bookingUrl, contact, siteDescription, siteName] = await Promise.all([
+    getAddress(),
+    getBookingUrl(),
+    getContact(),
+    getSiteDescription(),
+    getSiteName(),
+  ]);
+
   return (
     <section className="relative isolate overflow-hidden bg-surface">
       <link
@@ -53,13 +61,13 @@ export default function Hero() {
         <div className="max-w-xl text-center lg:max-w-[34rem]" data-aos="fade-up">
           <h1 className="flex flex-col items-center">
             <span className="text-sm font-semibold uppercase tracking-[0.2em] text-accent sm:text-base">
-              {`Chiropractor in ${ADDRESS.suburb}, ${ADDRESS.state}`}
+              {`Chiropractor in ${address.suburb}, ${address.state}`}
             </span>
             <img
               src={imageSrc(HERO_LOGO, 640)}
               srcSet={buildSrcSet(HERO_LOGO)}
               sizes="(min-width: 1024px) 20rem, (min-width: 640px) 17rem, 14rem"
-              alt={SITE_NAME}
+              alt={siteName}
               width={1072}
               height={678}
               loading="eager"
@@ -72,11 +80,11 @@ export default function Hero() {
           <span aria-hidden="true" className="mx-auto mt-8 block h-px w-28 bg-accent" />
 
           <p className="mx-auto mt-8 max-w-md text-base leading-relaxed text-primary/80 sm:text-lg">
-            {SITE_DESCRIPTION}
+            {siteDescription}
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
-            <Button href={BOOKING_URL} className="text-base uppercase" fullWidthOnMobile>
+            <Button href={bookingUrl} className="text-base uppercase" fullWidthOnMobile>
               <Icon name="calendar" className="mr-3 h-5 w-5" />
               Book online
             </Button>
@@ -84,7 +92,7 @@ export default function Hero() {
 
           <p className="mt-8 flex items-center justify-center gap-2 text-sm font-medium text-primary">
             <Icon name="pin" className="h-5 w-5 text-accent" />
-            {CONTACT.region}
+            {contact.region}
           </p>
         </div>
       </div>

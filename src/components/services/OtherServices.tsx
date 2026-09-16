@@ -1,14 +1,15 @@
 import Link from "next/link";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { SERVICES } from "@/lib/services-content";
+import { getServices } from "@/lib/services-content";
 
 export interface OtherServicesProps {
   currentSlug: string;
 }
 
-export default function OtherServices({ currentSlug }: OtherServicesProps) {
-  const others = SERVICES.filter((service) => service.slug !== currentSlug);
+export default async function OtherServices({ currentSlug }: OtherServicesProps) {
+  const services = await getServices();
+  const others = services.filter((service) => service.slug !== currentSlug);
   if (!others.length) return null;
 
   return (

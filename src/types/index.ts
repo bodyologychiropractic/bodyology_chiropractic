@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 export interface NavLink {
   label: string;
   href: string;
@@ -82,20 +80,6 @@ export interface Fee {
 export interface OpeningHour {
   days: string;
   hours: string;
-}
-
-export interface WithChildren {
-  children: ReactNode;
-}
-
-export interface WithClassName {
-  className?: string;
-}
-
-export interface PageMetaInput {
-  title: string;
-  description: string;
-  path: string;
 }
 
 export interface ResponsiveImageSet {

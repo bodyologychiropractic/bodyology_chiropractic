@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { SITE_URL, getSiteName } from "@/lib/constants";
 
-export const OG_IMAGE = {
-  url: "/og-image.jpg",
-  width: 1200,
-  height: 630,
-  alt: `${SITE_NAME} logo`,
-  type: "image/jpeg",
-};
+export function ogImage(siteName: string) {
+  return {
+    url: "/og-image.jpg",
+    width: 1200,
+    height: 630,
+    alt: `${siteName} logo`,
+    type: "image/jpeg",
+  };
+}
 
 /** Joins a route path onto SITE_URL, honouring the app's trailing-slash setting. */
 function absoluteUrl(path: string): string {
@@ -17,19 +19,29 @@ function absoluteUrl(path: string): string {
   return `${base}${normalized}`;
 }
 
-export function buildMetadata(
+interface SeoOverride {
+  title?: string | null;
+  description?: string | null;
+}
+
+export async function buildMetadata(
   title: string,
   description: string,
   path: string = "/",
-): Metadata {
+  seo?: SeoOverride,
+): Promise<Metadata> {
+  const siteName = await getSiteName();
   const url = absoluteUrl(path);
   const isHome = path === "/" || path === "";
-  const fullTitle = isHome ? title : `${title} | ${SITE_NAME}`;
+  const resolvedTitle = seo?.title || title;
+  const resolvedDescription = seo?.description || description;
+  const fullTitle = isHome ? resolvedTitle : `${resolvedTitle} | ${siteName}`;
+  const OG_IMAGE = ogImage(siteName);
 
   return {
     metadataBase: new URL(SITE_URL),
     title: fullTitle,
-    description,
+    description: resolvedDescription,
     alternates: { canonical: url },
     icons: {
       icon: [
@@ -43,9 +55,9 @@ export function buildMetadata(
     },
     openGraph: {
       title: fullTitle,
-      description,
+      description: resolvedDescription,
       url,
-      siteName: SITE_NAME,
+      siteName,
       locale: "en_AU",
       type: "website",
       images: [OG_IMAGE],
@@ -53,7 +65,7 @@ export function buildMetadata(
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
-      description,
+      description: resolvedDescription,
       images: [OG_IMAGE.url],
     },
     robots: {

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
-import { SERVICES } from "@/lib/services-content";
+import { getServices } from "@/lib/services-content";
 
 function url(path: string): string {
   const base = SITE_URL.replace(/\/$/, "");
@@ -10,7 +10,8 @@ function url(path: string): string {
 
 export const dynamic = "force-static";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const services = await getServices();
   const lastModified = new Date();
 
   const pages: Array<{ path: string; priority: number }> = [
@@ -19,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.8 },
     { path: "/fees", priority: 0.8 },
     { path: "/contact", priority: 0.7 },
-    ...SERVICES.map((service) => ({
+    ...services.map((service) => ({
       path: `/services/${service.slug}`,
       priority: 0.7,
     })),

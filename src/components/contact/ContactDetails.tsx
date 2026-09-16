@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import Icon from "@/components/ui/Icon";
 import {
-  CONTACT,
   MAP_DIRECTIONS_URL,
-  OPENING_HOURS,
-  SOCIAL_LINKS,
+  getContact,
+  getOpeningHours,
+  getSocialLinks,
 } from "@/lib/constants";
 import type { IconName } from "@/types";
 
@@ -32,18 +32,24 @@ function DetailRow({
   );
 }
 
-export default function ContactDetails() {
+export default async function ContactDetails() {
+  const [contact, openingHours, socialLinks] = await Promise.all([
+    getContact(),
+    getOpeningHours(),
+    getSocialLinks(),
+  ]);
+
   return (
     <div className="space-y-8">
       <DetailRow icon="pin" title="Visit us">
         <address className="not-italic">
-          {CONTACT.addressLines.map((line) => (
+          {contact.addressLines.map((line) => (
             <span key={line} className="block">
               {line}
             </span>
           ))}
         </address>
-        <p className="mt-2 text-sm">{CONTACT.parking}</p>
+        <p className="mt-2 text-sm">{contact.parking}</p>
         <a
           href={MAP_DIRECTIONS_URL}
           target="_blank"
@@ -56,22 +62,22 @@ export default function ContactDetails() {
 
       <DetailRow icon="phone" title="Call us">
         <a
-          href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
+          href={`tel:${contact.phone.replace(/\s/g, "")}`}
           className="hover:text-foreground"
         >
-          {CONTACT.phone}
+          {contact.phone}
         </a>
       </DetailRow>
 
       <DetailRow icon="mail" title="Email">
-        <a href={`mailto:${CONTACT.email}`} className="break-words hover:text-foreground">
-          {CONTACT.email}
+        <a href={`mailto:${contact.email}`} className="break-words hover:text-foreground">
+          {contact.email}
         </a>
       </DetailRow>
 
       <DetailRow icon="clock" title="Opening hours">
         <ul className="space-y-1">
-          {OPENING_HOURS.map((entry) => (
+          {openingHours.map((entry) => (
             <li key={entry.days} className="flex justify-between gap-6 sm:justify-start">
               <span className="min-w-28 font-medium text-foreground">{entry.days}</span>
               <span>{entry.hours}</span>
@@ -82,7 +88,7 @@ export default function ContactDetails() {
 
       <DetailRow icon="calendar" title="Follow us">
         <ul className="flex flex-wrap gap-x-6 gap-y-2">
-          {SOCIAL_LINKS.map((link) => (
+          {socialLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}

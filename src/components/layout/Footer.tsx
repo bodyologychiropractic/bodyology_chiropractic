@@ -1,14 +1,15 @@
 import Icon from "@/components/ui/Icon";
-import { SITE_NAME, SOCIAL_LINKS } from "@/lib/constants";
+import { getSiteName, getSocialLinks } from "@/lib/constants";
 
-export default function Footer() {
+export default async function Footer() {
+  const [siteName, socialLinks] = await Promise.all([getSiteName(), getSocialLinks()]);
   const year = new Date().getFullYear();
 
   return (
     <footer className="mt-auto border-t border-border py-2 pb-safe sm:py-4">
       <div className="container-page flex flex-col items-center gap-2">
         <ul className="flex items-center gap-2">
-          {SOCIAL_LINKS.map((link) => (
+          {socialLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
@@ -25,7 +26,7 @@ export default function Footer() {
         </ul>
 
         <p className="text-center text-sm text-muted">
-          &copy; {year} {SITE_NAME}. All rights reserved.
+          &copy; {year} {siteName}. All rights reserved.
         </p>
       </div>
     </footer>

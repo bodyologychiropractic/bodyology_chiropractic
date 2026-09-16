@@ -1,20 +1,13 @@
+import { cache } from "react";
 import type {
   NavLink,
   OpeningHour,
   ResponsiveImageSet,
   SocialLink,
 } from "@/types";
-import settings from "../../content/settings/settings.json";
-
-export const SITE_NAME: string = settings.siteName;
-
-export const SITE_TAGLINE: string = settings.siteTagline;
-
-export const SITE_DESCRIPTION: string = settings.siteDescription;
+import { getPayloadClient } from "@/lib/payload";
 
 export const SITE_URL = "https://www.bodyologychiropractic.com.au";
-
-export const BOOKING_URL: string = settings.bookingUrl;
 
 /** GA4 measurement ID. Empty string disables analytics. */
 export const GA_MEASUREMENT_ID = "G-6RDE6FLTSY";
@@ -50,29 +43,13 @@ export const ABOUT_IMAGE: ResponsiveImageSet = {
   widths: [480, 960],
 };
 
-export const NAV_LINKS: NavLink[] = settings.navLinks;
+export const GEO = { latitude: -33.732148, longitude: 150.9465519 };
 
-export const SOCIAL_LINKS: SocialLink[] = settings.socialLinks as SocialLink[];
+const GEO_QUERY = `${GEO.latitude},${GEO.longitude}`;
 
-export const PRACTITIONER = settings.practitioner;
+export const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(GEO_QUERY)}&z=17&output=embed`;
 
-export const ADDRESS = settings.address;
-
-export const PHONE_E164: string = settings.phoneE164;
-
-export const CONTACT = {
-  phone: settings.contact.phone,
-  email: settings.contact.email,
-  website: settings.contact.website,
-  addressLines: [
-    ADDRESS.street,
-    `${ADDRESS.suburb} ${ADDRESS.state} ${ADDRESS.postcode}`,
-  ],
-  parking: settings.contact.parking,
-  region: settings.contact.region,
-};
-
-export const OPENING_HOURS: OpeningHour[] = settings.openingHours;
+export const MAP_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(GEO_QUERY)}`;
 
 export const OPENING_HOURS_SPEC = [
   {
@@ -82,12 +59,79 @@ export const OPENING_HOURS_SPEC = [
   },
 ];
 
-export const MAP_QUERY = `${SITE_NAME}, ${CONTACT.addressLines.join(", ")}`;
+/** Cached (per-request) fetch of the Settings global from Payload. */
+export const getSettings = cache(async () => {
+  const payload = await getPayloadClient();
+  return payload.findGlobal({ slug: "settings" });
+});
 
-export const GEO = { latitude: -33.732148, longitude: 150.9465519 };
+export async function getSiteName(): Promise<string> {
+  return (await getSettings()).siteName;
+}
 
-const GEO_QUERY = `${GEO.latitude},${GEO.longitude}`;
+export async function getSiteTagline(): Promise<string> {
+  return (await getSettings()).siteTagline ?? "";
+}
 
-export const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(GEO_QUERY)}&z=17&output=embed`;
+export async function getSiteDescription(): Promise<string> {
+  return (await getSettings()).siteDescription ?? "";
+}
 
-export const MAP_DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(GEO_QUERY)}`;
+export async function getBookingUrl(): Promise<string> {
+  return (await getSettings()).bookingUrl ?? "#";
+}
+
+export async function getNavLinks(): Promise<NavLink[]> {
+  return ((await getSettings()).navLinks ?? []) as NavLink[];
+}
+
+export async function getSocialLinks(): Promise<SocialLink[]> {
+  return ((await getSettings()).socialLinks ?? []) as SocialLink[];
+}
+
+export async function getPractitioner() {
+  const settings = await getSettings();
+  return {
+    name: settings.practitioner?.name ?? "",
+    role: settings.practitioner?.role ?? "",
+    intro: (settings.practitioner?.intro ?? []).map((entry: { value: string }) => entry.value),
+    credentials: (settings.practitioner?.credentials ?? []).map(
+      (entry: { value: string }) => entry.value,
+    ),
+  };
+}
+
+export async function getAddress() {
+  const settings = await getSettings();
+  return {
+    street: settings.address?.street ?? "",
+    suburb: settings.address?.suburb ?? "",
+    state: settings.address?.state ?? "",
+    postcode: settings.address?.postcode ?? "",
+    country: settings.address?.country ?? "",
+  };
+}
+
+export async function getPhoneE164(): Promise<string> {
+  return (await getSettings()).phoneE164 ?? "";
+}
+
+export async function getContact() {
+  const settings = await getSettings();
+  const address = await getAddress();
+  return {
+    phone: settings.contact?.phone ?? "",
+    email: settings.contact?.email ?? "",
+    website: settings.contact?.website ?? "",
+    addressLines: [
+      address.street,
+      `${address.suburb} ${address.state} ${address.postcode}`,
+    ],
+    parking: settings.contact?.parking ?? "",
+    region: settings.contact?.region ?? "",
+  };
+}
+
+export async function getOpeningHours(): Promise<OpeningHour[]> {
+  return ((await getSettings()).openingHours ?? []) as OpeningHour[];
+}

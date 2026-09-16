@@ -1,13 +1,15 @@
 import type { MetadataRoute } from "next";
-import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/constants";
+import { getSiteDescription, getSiteName } from "@/lib/constants";
 
 export const dynamic = "force-static";
 
-export default function manifest(): MetadataRoute.Manifest {
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const [siteName, siteDescription] = await Promise.all([getSiteName(), getSiteDescription()]);
+
   return {
-    name: SITE_NAME,
+    name: siteName,
     short_name: "Bodyology",
-    description: SITE_DESCRIPTION,
+    description: siteDescription,
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

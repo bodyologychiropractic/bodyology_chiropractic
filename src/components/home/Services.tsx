@@ -2,21 +2,26 @@ import Link from "next/link";
 import ServiceCard from "@/components/services/ServiceCard";
 import Section from "@/components/ui/Section";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { SERVICES } from "@/lib/services-content";
-import homeData from "../../../content/home/home.json";
+import { getServices } from "@/lib/services-content";
+import { getHomeServicesSection } from "@/lib/home-content";
 
-export default function Services() {
+export default async function Services() {
+  const [services, servicesSection] = await Promise.all([
+    getServices(),
+    getHomeServicesSection(),
+  ]);
+
   return (
     <Section id="services">
       <SectionHeading
-        eyebrow={homeData.servicesSection.eyebrow}
-        title={homeData.servicesSection.title}
-        description={homeData.servicesSection.description}
+        eyebrow={servicesSection.eyebrow}
+        title={servicesSection.title}
+        description={servicesSection.description}
         data-aos="fade-up"
       />
 
       <ul className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-        {SERVICES.map((service, index) => (
+        {services.map((service, index) => (
           <li
             key={service.slug}
             data-aos="fade-up"

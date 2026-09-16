@@ -1,17 +1,18 @@
 import Script from "next/script";
 
 import {
-  CONTACT,
   GA_MEASUREMENT_ID,
   GOOGLE_ADS_CALL_CONVERSION_LABEL,
   GOOGLE_ADS_CONVERSION_ID,
+  getContact,
 } from "@/lib/constants";
 
-export default function GoogleAnalytics() {
+export default async function GoogleAnalytics() {
   if (!GA_MEASUREMENT_ID && !GOOGLE_ADS_CONVERSION_ID) return null;
 
+  const contact = await getContact();
   const gtagId = GA_MEASUREMENT_ID || GOOGLE_ADS_CONVERSION_ID;
-  const phoneConversionNumber = CONTACT.phone.replace(/\s/g, "");
+  const phoneConversionNumber = contact.phone.replace(/\s/g, "");
 
   return (
     <>

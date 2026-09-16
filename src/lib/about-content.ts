@@ -1,20 +1,86 @@
+import { cache } from "react";
 import type { ChecklistContent, ProseContent } from "@/types";
-import aboutData from "../../content/about/about.json";
+import { getPayloadClient } from "@/lib/payload";
+import { richTextToParagraphs } from "@/payload/richtext";
 
-export const ABOUT_INTRO: ProseContent = aboutData.intro;
+const getAbout = cache(async () => {
+  const payload = await getPayloadClient();
+  return payload.findGlobal({ slug: "about" });
+});
 
-export const ABOUT_PRACTITIONER: ProseContent = aboutData.practitioner;
+function toProse(id: string, group: { eyebrow?: string | null; title: string; paragraphs?: unknown }): ProseContent {
+  return {
+    id,
+    eyebrow: group.eyebrow ?? undefined,
+    title: group.title,
+    paragraphs: richTextToParagraphs(group.paragraphs),
+  };
+}
 
-export const ABOUT_BEYOND_PAIN: ProseContent = aboutData.beyondPain;
+function toChecklist(
+  id: string,
+  group: {
+    eyebrow?: string | null;
+    title: string;
+    description?: string | null;
+    items?: { value: string }[] | null;
+  },
+): ChecklistContent {
+  return {
+    id,
+    eyebrow: group.eyebrow ?? undefined,
+    title: group.title,
+    description: group.description ?? undefined,
+    items: (group.items ?? []).map((item) => item.value),
+  };
+}
 
-export const ABOUT_FASCIA: ProseContent = aboutData.fascia;
+export async function getAboutIntro(): Promise<ProseContent> {
+  const about = await getAbout();
+  return toProse("about-intro", about.intro);
+}
 
-export const ABOUT_CARE_APPROACH: ChecklistContent = aboutData.careApproach;
+export async function getAboutPractitioner(): Promise<ProseContent> {
+  const about = await getAbout();
+  return toProse("practitioner", about.practitioner);
+}
 
-export const ABOUT_CARE_APPROACH_NOTE: string = aboutData.careApproachNote;
+export async function getAboutBeyondPain(): Promise<ProseContent> {
+  const about = await getAbout();
+  return toProse("beyond-pain", about.beyondPain);
+}
 
-export const ABOUT_CONDITIONS: ChecklistContent = aboutData.conditions;
+export async function getAboutFascia(): Promise<ProseContent> {
+  const about = await getAbout();
+  return toProse("fascia", about.fascia);
+}
 
-export const ABOUT_QUALIFICATIONS: ChecklistContent = aboutData.qualifications;
+export async function getAboutCareApproach(): Promise<ChecklistContent> {
+  const about = await getAbout();
+  return toChecklist("care-approach", about.careApproach);
+}
 
-export const ABOUT_CLOSING: string = aboutData.closing;
+export async function getAboutCareApproachNote(): Promise<string> {
+  const about = await getAbout();
+  return about.careApproachNote ?? "";
+}
+
+export async function getAboutConditions(): Promise<ChecklistContent> {
+  const about = await getAbout();
+  return toChecklist("conditions", about.conditions);
+}
+
+export async function getAboutQualifications(): Promise<ChecklistContent> {
+  const about = await getAbout();
+  return toChecklist("qualifications", about.qualifications);
+}
+
+export async function getAboutClosing(): Promise<string> {
+  const about = await getAbout();
+  return about.closing ?? "";
+}
+
+export async function getAboutSeo() {
+  const about = await getAbout();
+  return about.seo ?? {};
+}

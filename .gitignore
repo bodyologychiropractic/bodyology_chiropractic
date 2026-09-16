@@ -55,5 +55,6 @@ next-env.d.ts
 .cache/
 .turbo/
 
-/tina/__generated__
-/public/admin
+
+# payload
+/public/media

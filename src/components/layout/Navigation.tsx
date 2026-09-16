@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { NAV_LINKS } from "@/lib/constants";
+import type { NavLink } from "@/types";
 
 export interface NavigationProps {
   className?: string;
+  navLinks: NavLink[];
 }
 
-export default function Navigation({ className = "" }: NavigationProps) {
+export default function Navigation({ className = "", navLinks }: NavigationProps) {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,7 +43,7 @@ export default function Navigation({ className = "" }: NavigationProps) {
   return (
     <nav className={className} aria-label="Main">
       <ul className="hidden items-center gap-6 md:flex lg:gap-8">
-        {NAV_LINKS.map((link) => (
+        {navLinks.map((link) => (
           <li key={link.href}>
             <Link
               href={link.href}
@@ -93,7 +94,7 @@ export default function Navigation({ className = "" }: NavigationProps) {
           className="absolute inset-x-0 top-full z-40 max-h-[calc(100dvh-100%)] overflow-y-auto border-t border-border bg-background shadow-lg md:hidden"
         >
           <ul className="container-page flex flex-col py-2 pb-safe">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.href} className="border-b border-border last:border-b-0">
                 <Link
                   href={link.href}

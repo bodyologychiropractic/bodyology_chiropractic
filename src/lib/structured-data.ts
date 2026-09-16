@@ -1,34 +1,49 @@
 import {
-  ADDRESS,
-  CONTACT,
   GEO,
   MAP_DIRECTIONS_URL,
   OPENING_HOURS_SPEC,
-  PHONE_E164,
-  PRACTITIONER,
-  SITE_DESCRIPTION,
-  SITE_NAME,
   SITE_URL,
-  SOCIAL_LINKS,
+  getAddress,
+  getContact,
+  getPhoneE164,
+  getPractitioner,
+  getSiteDescription,
+  getSiteName,
+  getSocialLinks,
 } from "@/lib/constants";
-import { SERVICES } from "@/lib/services-content";
-import { FEES } from "@/lib/fees-content";
+import { getServices } from "@/lib/services-content";
+import { getFees } from "@/lib/fees-content";
 import type { Service } from "@/types";
-
-export const PRACTICE_ID = `${SITE_URL}/#practice`;
 
 function absolute(path: string): string {
   return `${SITE_URL.replace(/\/$/, "")}${path}`;
 }
 
-export function practiceSchema() {
+export async function practiceId(): Promise<string> {
+  return `${SITE_URL}/#practice`;
+}
+
+export async function practiceSchema() {
+  const [siteName, siteDescription, address, phoneE164, contact, socialLinks, practitioner, services] =
+    await Promise.all([
+      getSiteName(),
+      getSiteDescription(),
+      getAddress(),
+      getPhoneE164(),
+      getContact(),
+      getSocialLinks(),
+      getPractitioner(),
+      getServices(),
+    ]);
+  const practiceId = `${SITE_URL}/#practice`;
+
   return {
     "@context": "https://schema.org",
     "@type": ["Chiropractic", "LocalBusiness"],
-    "@id": PRACTICE_ID,
-    name: SITE_NAME,
+    "@id": practiceId,
+    name: siteName,
     slogan: "Better Flow. Better Life.",
-    description: SITE_DESCRIPTION,
+    description: siteDescription,
     url: `${SITE_URL}/`,
     logo: {
       "@type": "ImageObject",
@@ -37,18 +52,18 @@ export function practiceSchema() {
       height: 512,
     },
     image: absolute("/images/hero/hero-1600.webp"),
-    telephone: PHONE_E164,
-    email: CONTACT.email,
+    telephone: phoneE164,
+    email: contact.email,
     priceRange: "$$",
     currenciesAccepted: "AUD",
     medicalSpecialty: "Chiropractic",
     address: {
       "@type": "PostalAddress",
-      streetAddress: ADDRESS.street,
-      addressLocality: ADDRESS.suburb,
-      addressRegion: ADDRESS.state,
-      postalCode: ADDRESS.postcode,
-      addressCountry: ADDRESS.country,
+      streetAddress: address.street,
+      addressLocality: address.suburb,
+      addressRegion: address.state,
+      postalCode: address.postcode,
+      addressCountry: address.country,
     },
     geo: {
       "@type": "GeoCoordinates",
@@ -58,7 +73,7 @@ export function practiceSchema() {
     hasMap: MAP_DIRECTIONS_URL,
     areaServed: {
       "@type": "AdministrativeArea",
-      name: `${ADDRESS.suburb}, ${ADDRESS.state}`,
+      name: `${address.suburb}, ${address.state}`,
     },
     openingHoursSpecification: OPENING_HOURS_SPEC.map((entry) => ({
       "@type": "OpeningHoursSpecification",
@@ -66,13 +81,13 @@ export function practiceSchema() {
       opens: entry.opens,
       closes: entry.closes,
     })),
-    sameAs: SOCIAL_LINKS.map((link) => link.href),
+    sameAs: socialLinks.map((link) => link.href),
     employee: {
       "@type": "Person",
-      name: PRACTITIONER.name,
-      jobTitle: PRACTITIONER.role,
+      name: practitioner.name,
+      jobTitle: practitioner.role,
     },
-    makesOffer: SERVICES.map((service) => ({
+    makesOffer: services.map((service) => ({
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
@@ -83,15 +98,16 @@ export function practiceSchema() {
   };
 }
 
-export function websiteSchema() {
+export async function websiteSchema() {
+  const siteName = await getSiteName();
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
-    name: SITE_NAME,
+    name: siteName,
     url: `${SITE_URL}/`,
     inLanguage: "en-AU",
-    publisher: { "@id": PRACTICE_ID },
+    publisher: { "@id": `${SITE_URL}/#practice` },
   };
 }
 
@@ -103,30 +119,31 @@ export function serviceSchema(service: Service) {
     description: service.description,
     url: absolute(`/services/${service.slug}`),
     serviceType: service.title,
-    provider: { "@id": PRACTICE_ID },
-    areaServed: `${ADDRESS.suburb}, ${ADDRESS.state}`,
+    provider: { "@id": `${SITE_URL}/#practice` },
   };
 }
 
-export function personSchema() {
+export async function personSchema() {
+  const [practitioner, services] = await Promise.all([getPractitioner(), getServices()]);
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: PRACTITIONER.name,
-    jobTitle: PRACTITIONER.role,
+    name: practitioner.name,
+    jobTitle: practitioner.role,
     url: absolute("/about"),
-    worksFor: { "@id": PRACTICE_ID },
-    knowsAbout: SERVICES.map((service) => service.title),
+    worksFor: { "@id": `${SITE_URL}/#practice` },
+    knowsAbout: services.map((service) => service.title),
   };
 }
 
-export function feesSchema() {
+export async function feesSchema() {
+  const [siteName, fees] = await Promise.all([getSiteName(), getFees()]);
   return {
     "@context": "https://schema.org",
     "@type": "OfferCatalog",
-    name: `${SITE_NAME} consultation fees`,
+    name: `${siteName} consultation fees`,
     url: absolute("/fees"),
-    itemListElement: FEES.map((fee, index) => {
+    itemListElement: fees.map((fee, index) => {
       const amount = fee.price.startsWith("$")
         ? fee.price.replace(/[^0-9.]/g, "")
         : undefined;
@@ -142,7 +159,7 @@ export function feesSchema() {
         itemOffered: {
           "@type": "Service",
           name: fee.name,
-          provider: { "@id": PRACTICE_ID },
+          provider: { "@id": `${SITE_URL}/#practice` },
         },
       };
     }),

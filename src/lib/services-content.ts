@@ -1,31 +1,17 @@
+import { cache } from "react";
 import type { Service, ServiceDetailSection } from "@/types";
-import chiropracticAdjustments from "../../content/services/chiropractic-adjustments.json";
-import softTissueTherapy from "../../content/services/soft-tissue-therapy.json";
-import dryNeedling from "../../content/services/dry-needling.json";
-import electroDryNeedling from "../../content/services/electro-dry-needling.json";
-import fascialManipulation from "../../content/services/fascial-manipulation.json";
-import rehabilitation from "../../content/services/rehabilitation.json";
+import { getPayloadClient } from "@/lib/payload";
+import { richTextToPlainText } from "@/payload/richtext";
 
-interface ServiceEntry {
-  slug: string;
-  title: string;
-  description: string;
-  icon: string;
-  imageName: string;
-  imageWidths: number[];
-  whatItIs: string;
-  howItWorks: string;
-  howItHelps: string;
-}
-
-const SERVICE_ENTRIES: ServiceEntry[] = [
-  chiropracticAdjustments,
-  softTissueTherapy,
-  dryNeedling,
-  electroDryNeedling,
-  fascialManipulation,
-  rehabilitation,
-];
+const getServiceDocs = cache(async () => {
+  const payload = await getPayloadClient();
+  const result = await payload.find({
+    collection: "services",
+    limit: 100,
+    sort: "title",
+  });
+  return result.docs;
+});
 
 function detailSections(
   whatItIs: string,
@@ -39,17 +25,39 @@ function detailSections(
   ];
 }
 
-export const SERVICES: Service[] = SERVICE_ENTRIES.map((entry) => ({
-  slug: entry.slug,
-  title: entry.title,
-  description: entry.description,
-  icon: entry.icon as Service["icon"],
-  image: { base: `/images/services/${entry.imageName}`, ext: "webp", widths: entry.imageWidths },
-  detail: {
-    sections: detailSections(entry.whatItIs, entry.howItWorks, entry.howItHelps),
-  },
-}));
+export async function getServices(): Promise<Service[]> {
+  const docs = await getServiceDocs();
+  return docs.map((doc) => {
+    const imageBase = doc.imageBaseName || doc.slug;
+    const widths = (doc.imageWidths ?? []).map((w: { value: number }) => w.value);
 
-export function findService(slug: string): Service | undefined {
-  return SERVICES.find((service) => service.slug === slug);
+    return {
+      slug: doc.slug,
+      title: doc.title,
+      description: doc.description,
+      icon: doc.icon as Service["icon"],
+      image: {
+        base: `/images/services/${imageBase}`,
+        ext: "webp",
+        widths: widths.length > 0 ? widths : [400, 640, 940],
+      },
+      detail: {
+        sections: detailSections(
+          richTextToPlainText(doc.whatItIs),
+          richTextToPlainText(doc.howItWorks),
+          richTextToPlainText(doc.howItHelps),
+        ),
+      },
+    } satisfies Service;
+  });
+}
+
+export async function findService(slug: string): Promise<Service | undefined> {
+  const services = await getServices();
+  return services.find((service) => service.slug === slug);
+}
+
+export async function findServiceDoc(slug: string) {
+  const docs = await getServiceDocs();
+  return docs.find((doc) => doc.slug === slug);
 }
