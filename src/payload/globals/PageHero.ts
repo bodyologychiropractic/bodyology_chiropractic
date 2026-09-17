@@ -1,10 +1,11 @@
 import type { GlobalConfig } from "payload";
 import { seoField } from "../fields/seo";
+import { authenticated } from "../access/authenticated";
 
 export const PageHero: GlobalConfig = {
   slug: "pageHero",
   label: "Page Heroes",
-  access: { read: () => true },
+  access: { read: () => true, update: authenticated },
   fields: [
     {
       type: "group",

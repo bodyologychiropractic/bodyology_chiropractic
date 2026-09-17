@@ -1,11 +1,12 @@
 import type { CollectionConfig } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { seoField } from "../fields/seo";
+import { authenticated } from "../access/authenticated";
 
 export const Services: CollectionConfig = {
   slug: "services",
   admin: { useAsTitle: "title", defaultColumns: ["title", "slug", "icon"] },
-  access: { read: () => true },
+  access: { read: () => true, create: authenticated, update: authenticated, delete: authenticated },
   fields: [
     {
       type: "text",

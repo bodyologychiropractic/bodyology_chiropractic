@@ -1,11 +1,12 @@
 import type { GlobalConfig } from "payload";
 import { seoField } from "../fields/seo";
 import { checklistFields, proseFields } from "../fields/prose";
+import { authenticated } from "../access/authenticated";
 
 export const About: GlobalConfig = {
   slug: "about",
   label: "About Page",
-  access: { read: () => true },
+  access: { read: () => true, update: authenticated },
   fields: [
     { type: "group", name: "intro", label: "Intro", fields: proseFields },
     { type: "group", name: "practitioner", label: "Practitioner", fields: proseFields },

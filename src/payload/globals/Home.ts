@@ -1,10 +1,11 @@
 import type { GlobalConfig } from "payload";
 import { seoField } from "../fields/seo";
+import { authenticated } from "../access/authenticated";
 
 export const Home: GlobalConfig = {
   slug: "home",
   label: "Home Page",
-  access: { read: () => true },
+  access: { read: () => true, update: authenticated },
   fields: [
     {
       type: "group",

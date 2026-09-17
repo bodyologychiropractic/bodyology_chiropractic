@@ -1,9 +1,10 @@
 import type { GlobalConfig } from "payload";
+import { authenticated } from "../access/authenticated";
 
 export const Settings: GlobalConfig = {
   slug: "settings",
   label: "Site Settings",
-  access: { read: () => true },
+  access: { read: () => true, update: authenticated },
   fields: [
     { type: "text", name: "siteName", label: "Site Name", required: true },
     { type: "text", name: "siteTagline", label: "Tagline" },
