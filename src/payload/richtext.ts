@@ -38,6 +38,65 @@ export function toLexicalSingle(text: string): SerializedEditorState {
   return toLexical([text]);
 }
 
+export type LexicalBlock =
+  | { type: "heading"; tag: "h2" | "h3"; text: string }
+  | { type: "paragraph"; text: string }
+  | { type: "list"; items: string[] };
+
+function textNode(text: string) {
+  return { type: "text", format: 0, detail: 0, mode: "normal", style: "", text, version: 1 };
+}
+
+/** Build multi-block Lexical JSON (headings, paragraphs, bullet lists) for longer-form content. */
+export function toLexicalDoc(blocks: LexicalBlock[]): SerializedEditorState {
+  const children = blocks.map((block) => {
+    if (block.type === "heading") {
+      return {
+        type: "heading",
+        tag: block.tag,
+        format: "",
+        indent: 0,
+        version: 1,
+        direction: "ltr" as const,
+        children: [textNode(block.text)],
+      };
+    }
+    if (block.type === "list") {
+      return {
+        type: "list",
+        listType: "bullet",
+        tag: "ul",
+        start: 1,
+        format: "",
+        indent: 0,
+        version: 1,
+        direction: "ltr" as const,
+        children: block.items.map((item) => ({
+          type: "listitem",
+          format: "",
+          indent: 0,
+          version: 1,
+          value: 1,
+          direction: "ltr" as const,
+          children: [textNode(item)],
+        })),
+      };
+    }
+    return {
+      type: "paragraph",
+      format: "",
+      indent: 0,
+      version: 1,
+      direction: "ltr" as const,
+      children: [textNode(block.text)],
+    };
+  });
+
+  return {
+    root: { type: "root", format: "", indent: 0, version: 1, direction: "ltr", children },
+  } as unknown as SerializedEditorState;
+}
+
 interface LexicalNode {
   type?: string;
   text?: string;

@@ -8,6 +8,7 @@ import sharp from "sharp";
 import { Users } from "./payload/collections/Users";
 import { Media } from "./payload/collections/Media";
 import { Services } from "./payload/collections/Services";
+import { LegalPages } from "./payload/collections/LegalPages";
 import { Settings } from "./payload/globals/Settings";
 import { Fees } from "./payload/globals/Fees";
 import { About } from "./payload/globals/About";
@@ -20,7 +21,7 @@ const dirname = path.dirname(filename);
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || "",
   editor: lexicalEditor(),
-  collections: [Users, Media, Services],
+  collections: [Users, Media, Services, LegalPages],
   globals: [Settings, Fees, About, Home, PageHero],
   db: postgresAdapter({
     pool: {

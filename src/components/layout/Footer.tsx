@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Icon from "@/components/ui/Icon";
 import { getSiteName, getSocialLinks } from "@/lib/constants";
 
@@ -28,6 +29,20 @@ export default async function Footer() {
         <p className="text-center text-sm text-muted">
           &copy; {year} {siteName}. All rights reserved.
         </p>
+
+        <ul className="flex items-center gap-4 text-sm text-muted">
+          <li>
+            <Link href="/privacy-policy" className="transition-colors hover:text-foreground">
+              Privacy Policy
+            </Link>
+          </li>
+          <li aria-hidden="true">&middot;</li>
+          <li>
+            <Link href="/terms-conditions" className="transition-colors hover:text-foreground">
+              Terms &amp; Conditions
+            </Link>
+          </li>
+        </ul>
       </div>
     </footer>
   );
