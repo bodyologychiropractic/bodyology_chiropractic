@@ -2,11 +2,13 @@ import type { GlobalConfig } from "payload";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { seoField } from "../fields/seo";
 import { authenticated } from "../access/authenticated";
+import { revalidateGlobal } from "../hooks/revalidate";
 
 export const Fees: GlobalConfig = {
   slug: "fees",
   label: "Fees Page",
   access: { read: () => true, update: authenticated },
+  hooks: { afterChange: [revalidateGlobal] },
   fields: [
     { type: "richText", name: "intro", label: "Intro", editor: lexicalEditor() },
     {

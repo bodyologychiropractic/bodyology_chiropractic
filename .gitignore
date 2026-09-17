@@ -58,3 +58,6 @@ next-env.d.ts
 
 # payload
 /public/media
+
+/content
+/scripts/seed-payload.ts

@@ -1,11 +1,13 @@
 import type { GlobalConfig } from "payload";
 import { seoField } from "../fields/seo";
 import { authenticated } from "../access/authenticated";
+import { revalidateGlobal } from "../hooks/revalidate";
 
 export const Home: GlobalConfig = {
   slug: "home",
   label: "Home Page",
   access: { read: () => true, update: authenticated },
+  hooks: { afterChange: [revalidateGlobal] },
   fields: [
     {
       type: "group",
