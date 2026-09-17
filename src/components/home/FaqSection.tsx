@@ -51,7 +51,7 @@ export default async function FaqSection() {
       <div className="mt-12 text-center" data-aos="fade-up">
         <p className="text-base text-on-dark/80 sm:text-lg">Still have questions?</p>
         <div className="mt-4">
-          <Button href="/contact" variant="secondary">
+          <Button href="/contact" className="text-base uppercase" fullWidthOnMobile>
             Contact Us
           </Button>
         </div>

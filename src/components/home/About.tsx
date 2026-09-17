@@ -1,10 +1,11 @@
+import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import ResponsiveImage from "@/components/ui/ResponsiveImage";
 import Section from "@/components/ui/Section";
-import { ABOUT_IMAGE, getPractitioner } from "@/lib/constants";
+import { ABOUT_IMAGE, getBookingUrl, getPractitioner } from "@/lib/constants";
 
 export default async function About() {
-  const practitioner = await getPractitioner();
+  const [practitioner, bookingUrl] = await Promise.all([getPractitioner(), getBookingUrl()]);
 
   return (
     <Section
@@ -51,6 +52,13 @@ export default async function About() {
             </li>
           ))}
         </ul>
+
+        <div className="mt-8">
+          <Button href={bookingUrl} className="text-base uppercase" fullWidthOnMobile>
+            <Icon name="calendar" className="mr-3 h-5 w-5" />
+            Book online
+          </Button>
+        </div>
       </div>
     </Section>
   );
