@@ -14,3 +14,19 @@ export async function getHomeServicesSection() {
     description: home.servicesSection?.description ?? "",
   };
 }
+
+export async function getHomeFirstTimeService() {
+  const home = await getHomeGlobal();
+  const section = home.firstTimeService;
+
+  return {
+    title: section?.title ?? "",
+    description: section?.description ?? "",
+    steps: (section?.steps ?? []).map((step) => ({
+      image: typeof step.image === "object" ? step.image : null,
+      title: step.title,
+      description: step.description ?? "",
+    })),
+    bannerImage: typeof section?.bannerImage === "object" ? section.bannerImage : null,
+  };
+}

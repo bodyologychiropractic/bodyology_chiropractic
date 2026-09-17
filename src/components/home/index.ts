@@ -3,3 +3,4 @@ export { default as Services } from "./Services";
 export { default as About } from "./About";
 export { default as InfoBar } from "./InfoBar";
 export { default as FaqSection } from "./FaqSection";
+export { default as FirstTimeService } from "./FirstTimeService";

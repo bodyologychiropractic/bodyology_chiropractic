@@ -1,5 +1,5 @@
 import BookingSection from "@/components/booking/BookingSection";
-import { About, FaqSection, Hero, InfoBar, Services } from "@/components/home";
+import { About, FaqSection, FirstTimeService, Hero, InfoBar, Services } from "@/components/home";
 
 export default function HomePage() {
   return (
@@ -7,8 +7,9 @@ export default function HomePage() {
       <Hero />
       <Services />
       <About />
-      <FaqSection />
+      <FirstTimeService />
       <BookingSection />
+      <FaqSection />
       <InfoBar />
     </>
   );

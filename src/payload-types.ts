@@ -875,6 +875,25 @@ export interface Home {
     description?: string | null;
   };
   /**
+   * Homepage section with numbered steps for new patients, a Book Online button, and a promo banner image below it.
+   */
+  firstTimeService?: {
+    title?: string | null;
+    description?: string | null;
+    steps?:
+      | {
+          image?: (number | null) | Media;
+          title: string;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Set the alt text on the Media item itself for SEO/accessibility.
+     */
+    bannerImage?: (number | null) | Media;
+  };
+  /**
    * Overrides for the page <title> and meta description.
    */
   seo?: {
@@ -1128,6 +1147,21 @@ export interface HomeSelect<T extends boolean = true> {
         eyebrow?: T;
         title?: T;
         description?: T;
+      };
+  firstTimeService?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        steps?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+        bannerImage?: T;
       };
   seo?:
     | T

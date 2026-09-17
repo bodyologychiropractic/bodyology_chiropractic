@@ -19,6 +19,39 @@ export const Home: GlobalConfig = {
         { type: "textarea", name: "description", label: "Description" },
       ],
     },
+    {
+      type: "group",
+      name: "firstTimeService",
+      label: "First Time Visit Section",
+      admin: {
+        description:
+          "Homepage section with numbered steps for new patients, a Book Online button, and a promo banner image below it.",
+      },
+      fields: [
+        { type: "text", name: "title", label: "Title" },
+        { type: "textarea", name: "description", label: "Description" },
+        {
+          type: "array",
+          name: "steps",
+          label: "Steps",
+          labels: { singular: "Step", plural: "Steps" },
+          fields: [
+            { type: "upload", name: "image", label: "Image", relationTo: "media" },
+            { type: "text", name: "title", label: "Title", required: true },
+            { type: "textarea", name: "description", label: "Description" },
+          ],
+        },
+        {
+          type: "upload",
+          name: "bannerImage",
+          label: "Banner image (shown below the Book Online button)",
+          relationTo: "media",
+          admin: {
+            description: "Set the alt text on the Media item itself for SEO/accessibility.",
+          },
+        },
+      ],
+    },
     seoField,
   ],
 };

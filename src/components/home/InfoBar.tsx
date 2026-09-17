@@ -15,13 +15,13 @@ function Column({
 }) {
   return (
     <div className="flex flex-col">
-      <h3 className="flex items-center gap-3 text-lg font-medium">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-on-dark/10 text-on-dark">
+      <h3 className="flex items-center gap-3 text-lg font-medium text-primary">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
           <Icon name={icon} className="h-5 w-5" />
         </span>
         {title}
       </h3>
-      <div className="mt-4 space-y-2 text-sm text-on-dark/75">{children}</div>
+      <div className="mt-4 space-y-2 text-sm text-muted">{children}</div>
     </div>
   );
 }
@@ -36,18 +36,13 @@ export default async function InfoBar() {
   return (
     <Section
       id="contact"
-      tone="dark"
+      tone="surface"
       containerClassName="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8"
     >
       <div data-aos="fade-up">
         <Column icon="calendar" title="Book Online">
           <p>Book your appointment online 24/7.</p>
-          <Button
-            href={bookingUrl}
-            variant="outline-light"
-            className="mt-4"
-            fullWidthOnMobile
-          >
+          <Button href={bookingUrl} className="mt-4 text-base uppercase" fullWidthOnMobile>
             Book online
           </Button>
         </Column>
@@ -56,12 +51,12 @@ export default async function InfoBar() {
       <div data-aos="fade-up" data-aos-delay="80">
         <Column icon="phone" title="Contact">
           <p>
-            <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="hover:text-on-dark">
+            <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="hover:text-foreground">
               {contact.phone}
             </a>
           </p>
           <p>
-            <a href={`mailto:${contact.email}`} className="break-words hover:text-on-dark">
+            <a href={`mailto:${contact.email}`} className="break-words hover:text-foreground">
               {contact.email}
             </a>
           </p>
@@ -84,7 +79,7 @@ export default async function InfoBar() {
             {openingHours.map((entry) => (
               <div key={entry.days} className="flex justify-between gap-4">
                 <dt>{entry.days}</dt>
-                <dd className="text-on-dark">{entry.hours}</dd>
+                <dd className="text-foreground">{entry.hours}</dd>
               </div>
             ))}
           </dl>
