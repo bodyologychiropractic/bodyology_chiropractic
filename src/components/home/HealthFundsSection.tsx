@@ -1,5 +1,6 @@
 import Section from "@/components/ui/Section";
 import { getHomeHealthFundsSection } from "@/lib/home-content";
+import HealthFundsMarquee from "./HealthFundsMarquee";
 
 function StarIcon({ className = "" }: { className?: string }) {
   return (
@@ -52,23 +53,8 @@ export default async function HealthFundsSection() {
       </div>
 
       {section.funds.length > 0 ? (
-        <div
-          className="relative mx-auto mt-10 max-w-5xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]"
-          data-aos="fade-up"
-        >
-          <div className="flex w-max animate-marquee items-center gap-16 hover:[animation-play-state:paused]">
-            {[...section.funds, ...section.funds].map((fund, index) => (
-              <div key={`${fund.id}-${index}`} className="h-10 w-auto shrink-0 sm:h-12">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={fund.url ?? undefined}
-                  alt={fund.alt ?? ""}
-                  loading="lazy"
-                  className="h-full w-auto object-contain"
-                />
-              </div>
-            ))}
-          </div>
+        <div className="mx-auto mt-10 max-w-5xl" data-aos="fade-up">
+          <HealthFundsMarquee funds={section.funds} />
         </div>
       ) : null}
 

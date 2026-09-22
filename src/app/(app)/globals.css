@@ -164,21 +164,6 @@
   .pb-safe {
     padding-bottom: calc(1rem + var(--safe-bottom));
   }
-
-  /* Infinite left-to-right marquee for logo strips. The track is duplicated
-     in markup; animating -50% loops seamlessly regardless of content width. */
-  .animate-marquee {
-    animation: marquee 25s linear infinite;
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
