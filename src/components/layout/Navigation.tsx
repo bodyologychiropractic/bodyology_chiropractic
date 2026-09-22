@@ -14,10 +14,12 @@ export default function Navigation({ className = "", navLinks }: NavigationProps
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(null);
+  const [openDesktopSubmenu, setOpenDesktopSubmenu] = useState<string | null>(null);
 
   useEffect(() => {
     setIsOpen(false);
     setOpenMobileSubmenu(null);
+    setOpenDesktopSubmenu(null);
   }, [pathname]);
 
   useEffect(() => {
@@ -47,53 +49,63 @@ export default function Navigation({ className = "", navLinks }: NavigationProps
       <ul className="hidden items-center gap-6 md:flex lg:gap-8">
         {navLinks.map((link, index) => {
           const isLast = index === navLinks.length - 1;
+          const isSubmenuOpen = openDesktopSubmenu === link.href;
           return (
-            <li key={link.href} className={link.children ? "group relative" : undefined}>
-            <Link
-              href={link.href}
-              className={`${linkClass(link.href)} flex items-center gap-1 pb-1 text-sm uppercase tracking-wider`}
-              aria-current={isActive(link.href) ? "page" : undefined}
+            <li
+              key={link.href}
+              className={link.children ? "relative" : undefined}
+              onMouseEnter={link.children ? () => setOpenDesktopSubmenu(link.href) : undefined}
+              onMouseLeave={link.children ? () => setOpenDesktopSubmenu(null) : undefined}
             >
-              {link.label}
-              {link.children ? (
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                  className="h-3.5 w-3.5 transition-transform group-hover:rotate-180"
-                >
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
-              ) : null}
-            </Link>
-
-            {link.children ? (
-              <div
-                className={`invisible absolute top-full z-40 w-64 pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 ${
-                  isLast ? "right-0" : "left-0"
-                }`}
-                role="menu"
+              <Link
+                href={link.href}
+                onFocus={link.children ? () => setOpenDesktopSubmenu(link.href) : undefined}
+                className={`${linkClass(link.href)} flex items-center gap-1 pb-1 text-sm uppercase tracking-wider`}
+                aria-current={isActive(link.href) ? "page" : undefined}
+                aria-expanded={link.children ? isSubmenuOpen : undefined}
               >
-                <ul className="overflow-hidden rounded-xl border border-border bg-background py-2 shadow-lg">
-                  {link.children.map((child) => (
-                    <li key={child.href}>
-                      <Link
-                        href={child.href}
-                        role="menuitem"
-                        className="block px-4 py-2.5 text-sm text-primary/80 transition-colors hover:bg-surface hover:text-accent"
-                      >
-                        {child.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
-          </li>
+                {link.label}
+                {link.children ? (
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                    className={`h-3.5 w-3.5 transition-transform ${isSubmenuOpen ? "rotate-180" : ""}`}
+                  >
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                ) : null}
+              </Link>
+
+              {link.children ? (
+                <div
+                  className={`absolute top-full z-40 w-64 pt-3 transition-opacity duration-150 ${
+                    isLast ? "right-0" : "left-0"
+                  } ${isSubmenuOpen ? "visible opacity-100" : "invisible opacity-0"}`}
+                  role="menu"
+                  onFocus={() => setOpenDesktopSubmenu(link.href)}
+                  onBlur={() => setOpenDesktopSubmenu(null)}
+                >
+                  <ul className="overflow-hidden rounded-xl border border-border bg-background py-2 shadow-lg">
+                    {link.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          role="menuitem"
+                          className="block px-4 py-2.5 text-sm text-primary/80 transition-colors hover:bg-surface hover:text-accent"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </li>
           );
         })}
       </ul>
