@@ -3,6 +3,7 @@ import * as migration_20260917_013013_add_user_role from './20260917_013013_add_
 import * as migration_20260917_024318_add_legal_pages from './20260917_024318_add_legal_pages';
 import * as migration_20260917_032654_add_faqs from './20260917_032654_add_faqs';
 import * as migration_20260917_040458_add_first_time_service from './20260917_040458_add_first_time_service';
+import * as migration_20260922_133733_add_about_section from './20260922_133733_add_about_section';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20260917_040458_add_first_time_service.up,
     down: migration_20260917_040458_add_first_time_service.down,
-    name: '20260917_040458_add_first_time_service'
+    name: '20260917_040458_add_first_time_service',
+  },
+  {
+    up: migration_20260922_133733_add_about_section.up,
+    down: migration_20260922_133733_add_about_section.down,
+    name: '20260922_133733_add_about_section'
   },
 ];

@@ -875,6 +875,23 @@ export interface Home {
     description?: string | null;
   };
   /**
+   * Homepage introduction section with an image, eyebrow badge, title, description, a short checklist, and a button linking to the About page.
+   */
+  aboutSection?: {
+    image?: (number | null) | Media;
+    eyebrow?: string | null;
+    title?: string | null;
+    description?: string | null;
+    points?:
+      | {
+          title: string;
+          description?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    buttonLabel?: string | null;
+  };
+  /**
    * Homepage section with numbered steps for new patients, a Book Online button, and a promo banner image below it.
    */
   firstTimeService?: {
@@ -1147,6 +1164,22 @@ export interface HomeSelect<T extends boolean = true> {
         eyebrow?: T;
         title?: T;
         description?: T;
+      };
+  aboutSection?:
+    | T
+    | {
+        image?: T;
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+        points?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+        buttonLabel?: T;
       };
   firstTimeService?:
     | T

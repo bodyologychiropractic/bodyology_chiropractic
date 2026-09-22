@@ -21,6 +21,32 @@ export const Home: GlobalConfig = {
     },
     {
       type: "group",
+      name: "aboutSection",
+      label: "About Us Section",
+      admin: {
+        description:
+          "Homepage introduction section with an image, eyebrow badge, title, description, a short checklist, and a button linking to the About page.",
+      },
+      fields: [
+        { type: "upload", name: "image", label: "Image", relationTo: "media" },
+        { type: "text", name: "eyebrow", label: "Eyebrow badge", defaultValue: "Welcome to Bodyology Chiropractic" },
+        { type: "text", name: "title", label: "Title" },
+        { type: "textarea", name: "description", label: "Description" },
+        {
+          type: "array",
+          name: "points",
+          label: "Checklist points",
+          labels: { singular: "Point", plural: "Points" },
+          fields: [
+            { type: "text", name: "title", label: "Title", required: true },
+            { type: "textarea", name: "description", label: "Description" },
+          ],
+        },
+        { type: "text", name: "buttonLabel", label: "Button label", defaultValue: "Learn More About Us" },
+      ],
+    },
+    {
+      type: "group",
       name: "firstTimeService",
       label: "First Time Visit Section",
       admin: {

@@ -15,6 +15,23 @@ export async function getHomeServicesSection() {
   };
 }
 
+export async function getHomeAboutSection() {
+  const home = await getHomeGlobal();
+  const section = home.aboutSection;
+
+  return {
+    image: typeof section?.image === "object" ? section.image : null,
+    eyebrow: section?.eyebrow ?? "",
+    title: section?.title ?? "",
+    description: section?.description ?? "",
+    points: (section?.points ?? []).map((point) => ({
+      title: point.title,
+      description: point.description ?? "",
+    })),
+    buttonLabel: section?.buttonLabel ?? "Learn More About Us",
+  };
+}
+
 export async function getHomeFirstTimeService() {
   const home = await getHomeGlobal();
   const section = home.firstTimeService;
