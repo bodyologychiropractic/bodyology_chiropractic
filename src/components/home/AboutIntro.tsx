@@ -14,7 +14,7 @@ export default async function AboutIntro() {
       containerClassName="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
     >
       {section.image?.url ? (
-        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-primary/10 ring-1 ring-border" data-aos="fade-right">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-primary/10 ring-1 ring-border" data-aos="fade-right">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={section.image.url}
