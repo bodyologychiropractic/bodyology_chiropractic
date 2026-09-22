@@ -10,7 +10,6 @@ export default async function About() {
   return (
     <Section
       id="about"
-      tone="surface"
       containerClassName="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
     >
       <div data-aos="fade-right">

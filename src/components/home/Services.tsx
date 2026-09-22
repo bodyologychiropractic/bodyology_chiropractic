@@ -12,7 +12,7 @@ export default async function Services() {
   ]);
 
   return (
-    <Section id="services">
+    <Section id="services" tone="surface">
       <SectionHeading
         eyebrow={servicesSection.eyebrow}
         title={servicesSection.title}
