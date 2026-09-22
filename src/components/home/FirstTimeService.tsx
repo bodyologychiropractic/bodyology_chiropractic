@@ -47,7 +47,7 @@ export default async function FirstTimeService() {
               <span
                 className={[
                   "mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-accent text-lg font-semibold text-white ring-4 ring-background",
-                  step.image?.url ? "-mt-6" : "mt-0",
+                  step.image?.url ? "mt-4" : "mt-0",
                 ].join(" ")}
               >
                 {index + 1}
