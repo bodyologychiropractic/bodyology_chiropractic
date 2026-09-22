@@ -287,7 +287,6 @@ export interface Service {
   };
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -540,7 +539,6 @@ export interface ServicesSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -666,20 +664,10 @@ export interface Setting {
         id?: string | null;
       }[]
     | null;
-  /**
-   * Main navbar links. Add sub-links to a link to show a dropdown/submenu on hover (desktop) or as an expandable list (mobile).
-   */
   navLinks?:
     | {
-        label: string;
-        href: string;
-        children?:
-          | {
-              label: string;
-              href: string;
-              id?: string | null;
-            }[]
-          | null;
+        label?: string | null;
+        href?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1060,13 +1048,6 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
-        children?:
-          | T
-          | {
-              label?: T;
-              href?: T;
-              id?: T;
-            };
         id?: T;
       };
   updatedAt?: T;

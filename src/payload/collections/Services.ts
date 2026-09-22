@@ -6,24 +6,8 @@ import { revalidateCollection, revalidateCollectionDelete } from "../hooks/reval
 
 export const Services: CollectionConfig = {
   slug: "services",
-  admin: {
-    useAsTitle: "title",
-    defaultColumns: ["title", "slug", "icon", "_status"],
-  },
-  versions: {
-    drafts: {
-      autosave: { interval: 2000 },
-    },
-    maxPerDoc: 20,
-  },
-  access: {
-    // Logged-in admin users can see drafts (e.g. in the admin panel);
-    // everyone else only ever gets published services back from the API.
-    read: ({ req }) => (req.user ? true : { _status: { equals: "published" } }),
-    create: authenticated,
-    update: authenticated,
-    delete: authenticated,
-  },
+  admin: { useAsTitle: "title", defaultColumns: ["title", "slug", "icon"] },
+  access: { read: () => true, create: authenticated, update: authenticated, delete: authenticated },
   hooks: { afterChange: [revalidateCollection], afterDelete: [revalidateCollectionDelete] },
   fields: [
     {

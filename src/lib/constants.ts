@@ -82,18 +82,7 @@ export async function getBookingUrl(): Promise<string> {
 }
 
 export async function getNavLinks(): Promise<NavLink[]> {
-  const navLinks = (await getSettings()).navLinks ?? [];
-  return navLinks.map((link) => {
-    const children = (link.children ?? []).map((child) => ({
-      label: child.label,
-      href: child.href,
-    }));
-    return {
-      label: link.label,
-      href: link.href,
-      ...(children.length > 0 ? { children } : {}),
-    };
-  });
+  return ((await getSettings()).navLinks ?? []) as NavLink[];
 }
 
 export async function getSocialLinks(): Promise<SocialLink[]> {

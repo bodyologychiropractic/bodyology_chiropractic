@@ -86,24 +86,9 @@ export const Settings: GlobalConfig = {
       type: "array",
       name: "navLinks",
       label: "Navigation Links",
-      labels: { singular: "Link", plural: "Links" },
-      admin: {
-        description:
-          "Main navbar links. Add sub-links to a link to show a dropdown/submenu on hover (desktop) or as an expandable list (mobile).",
-      },
       fields: [
-        { type: "text", name: "label", label: "Label", required: true },
-        { type: "text", name: "href", label: "URL", required: true },
-        {
-          type: "array",
-          name: "children",
-          label: "Sub-links",
-          labels: { singular: "Sub-link", plural: "Sub-links" },
-          fields: [
-            { type: "text", name: "label", label: "Label", required: true },
-            { type: "text", name: "href", label: "URL", required: true },
-          ],
-        },
+        { type: "text", name: "label", label: "Label" },
+        { type: "text", name: "href", label: "URL" },
       ],
     },
   ],

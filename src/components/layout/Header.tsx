@@ -10,10 +10,11 @@ export default async function Header() {
     getServices(),
   ]);
 
-  // Sub-links are managed in the admin (Settings > Navigation Links). If a
-  // link has none configured, fall back to auto-listing services under it.
+  // The Services submenu is always auto-generated from the Services
+  // collection — admins add/remove services and the navbar dropdown
+  // updates automatically, no manual link management needed.
   const navLinksWithChildren = navLinks.map((link) =>
-    !link.children && link.href === "/services" && services.length > 0
+    link.href === "/services" && services.length > 0
       ? {
           ...link,
           children: services.map((service) => ({
