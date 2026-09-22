@@ -1,5 +1,14 @@
 import BookingSection from "@/components/booking/BookingSection";
-import { About, AboutIntro, FaqSection, FirstTimeService, Hero, InfoBar, Services } from "@/components/home";
+import {
+  About,
+  AboutIntro,
+  FaqSection,
+  FirstTimeService,
+  HealthFundsSection,
+  Hero,
+  InfoBar,
+  Services,
+} from "@/components/home";
 
 export default function HomePage() {
   return (
@@ -10,6 +19,7 @@ export default function HomePage() {
       <About />
       <FirstTimeService />
       <BookingSection />
+      <HealthFundsSection />
       <FaqSection />
       <InfoBar />
     </>

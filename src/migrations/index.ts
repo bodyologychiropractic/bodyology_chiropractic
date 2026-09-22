@@ -4,6 +4,7 @@ import * as migration_20260917_024318_add_legal_pages from './20260917_024318_ad
 import * as migration_20260917_032654_add_faqs from './20260917_032654_add_faqs';
 import * as migration_20260917_040458_add_first_time_service from './20260917_040458_add_first_time_service';
 import * as migration_20260922_133733_add_about_section from './20260922_133733_add_about_section';
+import * as migration_20260922_135135_add_health_funds_section from './20260922_135135_add_health_funds_section';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260922_133733_add_about_section.up,
     down: migration_20260922_133733_add_about_section.down,
-    name: '20260922_133733_add_about_section'
+    name: '20260922_133733_add_about_section',
+  },
+  {
+    up: migration_20260922_135135_add_health_funds_section.up,
+    down: migration_20260922_135135_add_health_funds_section.down,
+    name: '20260922_135135_add_health_funds_section'
   },
 ];

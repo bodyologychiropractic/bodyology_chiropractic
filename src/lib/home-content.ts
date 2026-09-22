@@ -32,6 +32,24 @@ export async function getHomeAboutSection() {
   };
 }
 
+export async function getHomeHealthFundsSection() {
+  const home = await getHomeGlobal();
+  const section = home.healthFundsSection;
+
+  return {
+    title: section?.title ?? "",
+    description: section?.description ?? "",
+    funds: (section?.funds ?? [])
+      .map((fund) => (typeof fund.image === "object" ? fund.image : null))
+      .filter((image): image is NonNullable<typeof image> => image !== null),
+    googleRating: {
+      rating: section?.googleRating?.rating ?? null,
+      reviewCount: section?.googleRating?.reviewCount ?? null,
+      url: section?.googleRating?.url ?? "",
+    },
+  };
+}
+
 export async function getHomeFirstTimeService() {
   const home = await getHomeGlobal();
   const section = home.firstTimeService;

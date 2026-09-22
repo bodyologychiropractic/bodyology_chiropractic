@@ -47,6 +47,43 @@ export const Home: GlobalConfig = {
     },
     {
       type: "group",
+      name: "healthFundsSection",
+      label: "Health Funds Section",
+      admin: {
+        description:
+          "Homepage section below the booking widget: health fund logos and a Google rating badge.",
+      },
+      fields: [
+        { type: "text", name: "title", label: "Title", defaultValue: "All Major Health Funds Accepted" },
+        {
+          type: "textarea",
+          name: "description",
+          label: "Description",
+          defaultValue: "Feel free to contact us to confirm if your health fund is included",
+        },
+        {
+          type: "array",
+          name: "funds",
+          label: "Health fund logos",
+          labels: { singular: "Logo", plural: "Logos" },
+          fields: [
+            { type: "upload", name: "image", label: "Logo image", relationTo: "media", required: true },
+          ],
+        },
+        {
+          type: "group",
+          name: "googleRating",
+          label: "Google Rating",
+          fields: [
+            { type: "number", name: "rating", label: "Rating", defaultValue: 5 },
+            { type: "number", name: "reviewCount", label: "Review count" },
+            { type: "text", name: "url", label: "Link to reviews (optional)" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "group",
       name: "firstTimeService",
       label: "First Time Visit Section",
       admin: {

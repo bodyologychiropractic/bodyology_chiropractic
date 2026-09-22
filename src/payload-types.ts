@@ -892,6 +892,24 @@ export interface Home {
     buttonLabel?: string | null;
   };
   /**
+   * Homepage section below the booking widget: health fund logos and a Google rating badge.
+   */
+  healthFundsSection?: {
+    title?: string | null;
+    description?: string | null;
+    funds?:
+      | {
+          image: number | Media;
+          id?: string | null;
+        }[]
+      | null;
+    googleRating?: {
+      rating?: number | null;
+      reviewCount?: number | null;
+      url?: string | null;
+    };
+  };
+  /**
    * Homepage section with numbered steps for new patients, a Book Online button, and a promo banner image below it.
    */
   firstTimeService?: {
@@ -1180,6 +1198,25 @@ export interface HomeSelect<T extends boolean = true> {
               id?: T;
             };
         buttonLabel?: T;
+      };
+  healthFundsSection?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        funds?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
+        googleRating?:
+          | T
+          | {
+              rating?: T;
+              reviewCount?: T;
+              url?: T;
+            };
       };
   firstTimeService?:
     | T
