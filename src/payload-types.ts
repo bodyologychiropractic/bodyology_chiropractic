@@ -664,10 +664,20 @@ export interface Setting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Main navbar links. Add sub-links to a link to show a dropdown/submenu on hover (desktop) or as an expandable list (mobile).
+   */
   navLinks?:
     | {
-        label?: string | null;
-        href?: string | null;
+        label: string;
+        href: string;
+        children?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1048,6 +1058,13 @@ export interface SettingsSelect<T extends boolean = true> {
     | {
         label?: T;
         href?: T;
+        children?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
         id?: T;
       };
   updatedAt?: T;
