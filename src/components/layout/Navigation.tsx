@@ -45,8 +45,10 @@ export default function Navigation({ className = "", navLinks }: NavigationProps
   return (
     <nav className={className} aria-label="Main">
       <ul className="hidden items-center gap-6 md:flex lg:gap-8">
-        {navLinks.map((link) => (
-          <li key={link.href} className={link.children ? "group relative" : undefined}>
+        {navLinks.map((link, index) => {
+          const isLast = index === navLinks.length - 1;
+          return (
+            <li key={link.href} className={link.children ? "group relative" : undefined}>
             <Link
               href={link.href}
               className={`${linkClass(link.href)} flex items-center gap-1 pb-1 text-sm uppercase tracking-wider`}
@@ -71,7 +73,9 @@ export default function Navigation({ className = "", navLinks }: NavigationProps
 
             {link.children ? (
               <div
-                className="invisible absolute left-1/2 top-full z-40 w-64 -translate-x-1/2 pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+                className={`invisible absolute top-full z-40 w-64 pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 ${
+                  isLast ? "right-0" : "left-0"
+                }`}
                 role="menu"
               >
                 <ul className="overflow-hidden rounded-xl border border-border bg-background py-2 shadow-lg">
@@ -90,7 +94,8 @@ export default function Navigation({ className = "", navLinks }: NavigationProps
               </div>
             ) : null}
           </li>
-        ))}
+          );
+        })}
       </ul>
 
       <button
